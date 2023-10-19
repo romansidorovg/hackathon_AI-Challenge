@@ -1,0 +1,263 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://kit.fontawesome.com/169a0e69c0.js"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="{% static 'css/apple-touch-icon.png' %}"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="{% static 'css/favicon-32x32.png' %}"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="{% static 'css/favicon-16x16.png' %}"
+    />
+    <link rel="manifest" href="{% static 'css/site.webmanifest' %}" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <title>Северсталь</title>
+  </head>
+  <body class="active">
+    <div class="wrapper">
+      <section class="main-section">
+        <div class="tabs-logo-row">
+          <img src="{% static 'css/sevstal-logo.png' %}" alt="logo" class="tabs-logo" height=100 width=300/>
+        </div>
+          <main class="tabs-section">
+          <div class="tabs-container">
+            <div class="tabs-body">
+              <div class="tabs-header">
+                <div class="tabs-tab tab-1 active">
+                  Калькулятор вероятности срыва поставки
+                </div>
+                <div class="tabs-tab tab-2">
+                  Импорт
+                </div>
+                <div class="tabs-tab tab-3">
+                  Аналитическая система
+                </div>
+              </div>
+              <div class="tabs-content">
+                <div class="tab-content tab-content-1 active">
+                  <form method="post" class="tabs-content-form">
+                    <div class="tab-content-inputs">
+                      <div class="input-wrapper">
+                        <div
+                          class="tab-content-input-row tab-content-input-row_product"
+                        >
+                          <select
+                            name="product"
+                            id="product"
+                            class="tab-content-input tab-content-input_product-name"
+                            tabindex="-1"
+                          ></select>
+                          <input
+                            placeholder="Кол-во товара"
+                            type="number"
+                            name="product_count"
+                            id="product_count"
+                            class="tab-content-input tab-content-input_product-count"
+                          />
+                        </div>
+                      </div>
+                      <div class="input-wrapper">
+                        <div class="tab-content-input-row">
+                          <input
+                            placeholder="Дата поставки"
+                            type="date"
+                            name="delivery_date"
+                            id="delivery_date"
+                            class="tab-content-input tab-content-input_delivery-date"
+                          />
+                          <select
+                            name="delivery_ver"
+                            id="delivery_ver"
+                            class="tab-content-input tab-content-input_delivery-ver"
+                            tabindex="-1"
+                          >
+                            <option value="1">
+                              Вариант поставки №1
+                            </option>
+                            <option value="2">
+                              Вариант поставки №2
+                            </option>
+                            <option value="3">
+                              Вариант поставки №3
+                            </option>
+                          </select>
+                          <input
+                            disabled
+                            placeholder="Сумма товаров"
+                            type="number"
+                            name="product_price"
+                            id="product_price"
+                            class="tab-content-input tab-content-input_product-price"
+                          />
+                        </div>
+                      </div>
+                      <button type="button" class="tabs-content-form-button">
+                        Добавить товар
+                      </button>
+                    </div>
+                  </form>
+                  <div class="tab-content-cart">
+                    <h2 class="tab-content-cart-header">Корзина товаров</h2>
+                    <form
+                      method="post"
+                      action="{% url 'main:form_data' %}"
+                      class="tabs-content-form tabs-content-form_cart-form"
+                    >
+                    {% csrf_token %}
+                      <div class="tab-content-inputs tab-content-inputs_cart">
+                        <div class="tab-content-inputs__list">
+                          <div class="tab-content-inputs__item">
+                            Товар
+                          </div>
+                          <div class="tab-content-inputs__item">
+                            Кол-во товара
+                          </div>
+                          <div class="tab-content-inputs__item">
+                            Дата поставки
+                          </div>
+                          <div class="tab-content-inputs__item">
+                            Вариант поставки
+                          </div>
+                          <div class="tab-content-inputs__item">
+                            Сумма товаров
+                          </div>
+                        </div>
+                        <div class="inputs-container_cart">
+                          <div class="input-wrapper input-wrapper_cart-total">
+                            <div class="tab-content-input-row-total">
+                              <label for="cart_count_total"
+                                >Кол-во позиций</label
+                              >
+                              {{ form.user_position_quantity }}
+                              <label for="cart_pirce_total"
+                                >Сумма позиций</label
+                              >
+                              {{ form.user_quantity }}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <button
+                        type="submit"
+                        class="tabs-content-form-button tabs-content-form-button_submit"
+                      >
+                        Отправить
+                      </button>
+                    </form>
+                    {% if form_result %}
+                      <br>
+                      <p>Для вашего заказа подобрана следующая комбинация:</p>
+                      <p>{{ form_result }}</p>
+                    {% endif %}
+                  </div>
+                </div>
+                <div class="tab-content tab-content-2">
+                  <form
+                    enctype="multipart/form-data"
+                    method="post"
+                    action="{% url 'main:ai' %}"
+                    class="tabs-content-form import-form"
+                  >
+                    {% csrf_token %}
+                    <label class="tab-content-input-file-row">
+                      {{ file_form.file }} 
+                      <span class="tab-content-input-file-button"
+                        >Выберите файл</span
+                      >
+                      <span class="tab-content-input-file-text"
+                        >допустимый формат: .csv, .xlsx</span
+                      >
+                    </label>
+                    <button
+                        type="submit"
+                        class="tabs-content-form-button tabs-content-form-button_submit"
+                      >
+                        Отправить
+                      </button>
+                  </form>
+                </div>
+                <div class="tab-content tab-content-3">
+                  <iframe src="https://datalens.yandex/0c4rabu4xutip?_theme=dark" width="100%" height="800px" ></iframe>
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
+      </section>
+    </div>
+    <script src="{% static 'js/script.js' %}"></script>
+    <script>
+
+        // НИЖНЯЯ ФОРМА
+        const inputContainerCart = document.querySelector(".inputs-container_cart");
+        let productsCount = 0; // счетчик, который увеличивается по клику, чтобы присваиваться в именах и айди товаров
+        let totalPrice = 0; // счетчик, который увеличивается по клику, чтобы перезаписывать сумму всех товаров
+        let productDeleteButton;
+        let inputWrapperCart;
+        let productCartPrice;
+        tabsContentFormButton.addEventListener("click", function () {
+          if (
+            productInputCount.value &&
+            productInputDate.value &&
+            productInputPrice.value
+          ) {
+            productsCount++;
+            tabContentTotalCount.value++;
+            tabContentTotalPrice.value = totalPrice += +productInputPrice.value;
+            inputContainerCart.insertAdjacentHTML(
+              "afterbegin",
+              `<div class="input-wrapper input-wrapper_cart" data-id="${productsCount}">
+                <div class="inputs_cart">
+                  {{ form.user_material }}
+                  {{ form.user_amount }}
+                  {{ form.user_duration }}
+                  {{ form.user_delivery_option }}
+                  {{ form.amount }}
+                </div>
+                <button type="button" class="tab-content-input_cart-delete-product-button" data-id="${productsCount}">Удалить</button>
+              </div>
+              `
+            );
+            inputWrapperCart = document.querySelectorAll(".input-wrapper_cart");
+            productDeleteButton = document.querySelectorAll(
+              ".tab-content-input_cart-delete-product-button"
+            );
+            productCartPrice = document.querySelectorAll(
+              ".tab-content-input_cart-product-price"
+            );
+            productDeleteButton.forEach((button, buttonIndex, array) => {
+              button.addEventListener("click", function (e) {
+                if (e.target.dataset.id === inputWrapperCart[buttonIndex].dataset.id) {
+                  inputContainerCart.removeChild(inputWrapperCart[buttonIndex]);
+                  tabContentTotalPrice.value -= productCartPrice[buttonIndex].value;
+                  totalPrice -= productCartPrice[buttonIndex].value;
+                  tabContentTotalCount.value--;
+                }
+              });
+            });
+            productInputCount.value = "";
+            productInputDate.value = "";
+            productInputPrice.value = "";
+          }
+        });
+    </script>
+  </body>
+</html>

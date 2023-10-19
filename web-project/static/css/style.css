@@ -1,0 +1,337 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:100,100italic,300,300italic,regular,italic,500,500italic,700,700italic,900,900italic);
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+body {
+  display: block;
+  font-family: "Roboto";
+  background: rgb(206, 230, 254);
+  background: linear-gradient(
+    90deg,
+    rgba(206, 230, 254, 1) 0%,
+    rgba(108, 133, 174, 1) 35%,
+    rgba(218, 236, 255, 1) 100%
+  );
+  min-height: 100vh;
+}
+
+.wrapper {
+  /* display: flex;
+  flex-direction: column; */
+  padding: 10px;
+  overflow: hidden;
+}
+
+.main-section {
+  width: 100%;
+}
+
+.tabs-logo-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.header-container {
+  max-width: 1170px;
+  margin: 0px auto 20px auto;
+  display: flex;
+  justify-content: center;
+}
+.header-logo {
+  width: 100%;
+}
+
+.tabs-section {
+  font-size: 16px;
+  color: rgb(80, 80, 80);
+}
+
+.tabs-container {
+  max-width: 2000px;
+  margin: 0px auto;
+}
+
+.tabs-logo {
+  max-width: 100%;
+}
+
+.tabs-body {
+  background-color: #fff;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+}
+
+.tabs-header {
+  display: flex;
+  gap: 5px;
+  font-size: 22px;
+  flex-wrap: wrap;
+}
+
+.tabs-tab {
+  flex: 1 1 auto;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+  background-color: #fff;
+  padding: 10px;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+  letter-spacing: 1px;
+  transition: transform 0.3s ease 0s;
+}
+.tabs-tab.active {
+  background-color: #265fac;
+  color: #fff;
+  transform: translateY(-10px);
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.tabs-content {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 15px;
+  min-height: 72px;
+  position: relative;
+  overflow: hidden;
+}
+
+.tab-content {
+  position: absolute;
+  top: 100%;
+  transform: translateY(100%);
+  opacity: 0;
+  z-index: -1;
+  transition: all 0.4s;
+}
+.tab-content.active {
+  position: static;
+  transform: translateY(0px);
+  opacity: 1;
+  z-index: 1;
+  transition: all 0.4s;
+}
+
+.tabs-content-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.tabs-content-form:not(:last-child) {
+  margin-bottom: 50px;
+}
+
+.tab-content-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.tab-content-inputs_cart {
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+}
+
+.tab-content-input-row {
+  display: flex;
+  flex: 1 1 100%;
+  position: relative;
+  gap: 10px;
+}
+
+.tab-content-input {
+  font-family: "Roboto";
+  color: grey;
+  display: flex;
+  flex: 1 1 auto;
+  padding: 10px;
+  border: 2px solid #265fac;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease 0s;
+  font-size: 15px;
+}
+.tab-content-input_cart {
+  text-align: center;
+  border-radius: 0px;
+  border: 1px solid #fea000;
+  padding: 10px;
+  border-top: none;
+  box-shadow: none;
+}
+.tab-content-input_cart:not(:last-child) {
+  border-right: none;
+}
+.tab-content-input_product-name {
+  flex: 1 1 100%;
+}
+.tab-content-input_delivery-date {
+  flex: 1 1 100%;
+}
+.tab-content-input_delivery-ver {
+  flex: 1 1 100%;
+}
+
+.tab-content-input:focus {
+  outline: none;
+  border: 2px solid #fff;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.tabs-content-form-button {
+  display: inline-flex;
+  align-self: flex-start;
+  padding: 10px 15px;
+  font-weight: 700;
+  background-color: #265fac;
+  color: #fff;
+  border: 1px solid #265fac;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease 0s;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  letter-spacing: 1px;
+  font-size: 16px;
+}
+
+.tabs-content-form-button:hover {
+  background-color: #fff;
+  color: #fea000;
+  border: 1px solid #fff;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.input-wrapper {
+  display: flex;
+  gap: 10px;
+}
+
+.input-wrapper_cart {
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+}
+
+.inputs-container_cart {
+  display: flex;
+  flex-direction: column;
+}
+.inputs_cart {
+  display: flex;
+}
+.tab-content-input_cart-delete-product-button {
+  padding: 10px 15px;
+  font-weight: 700;
+  background-color: #ffff;
+  color: #fea000;
+  border: 1px solid #fea000;
+  cursor: pointer;
+  border-top: 0;
+  transition: all 0.3s ease 0s;
+  letter-spacing: 1px;
+  font-size: 15px;
+}
+.tab-content-input_cart-delete-product-button:hover {
+  background-color: #fff;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+}
+.input-wrapper_cart-total {
+  justify-content: flex-end;
+  display: flex;
+  gap: 0px;
+}
+.tab-content-input-row-total {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 10px;
+}
+.tab-content-input_cart-total {
+  align-self: flex-end;
+  border-radius: 0px;
+  color: #265fac;
+  border: 1px solid #265fac;
+  border-top: 0;
+  box-shadow: none;
+}
+.tab-content-inputs__list {
+  display: inline-flex;
+  font-size: 16px;
+}
+.tab-content-inputs__item {
+  flex: 1 1 100%;
+  text-align: center;
+  padding: 10px;
+  border: 1px solid #265fac;
+}
+.tab-content-inputs__item:not(:last-child) {
+  border-right: none;
+}
+
+@media (max-width: 680px) {
+  .tabs-logo-row {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .tab-content-input-row:not(:last-child) {
+    margin-bottom: 10px;
+  }
+}
+
+
+.tab-content-input-file-row {
+  position: relative;
+  display: inline-block;
+}
+.tab-content-input-file-button {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  outline: none;
+  text-decoration: none;
+  color: rgb(255 255 255);
+  text-align: center;
+  border: 1px solid #007bfb;
+  border-radius: 5px;
+  background-color: #007bfb;
+  line-height: 22px;
+  height: 40px;
+  padding: 10px 20px;
+  box-sizing: border-box;
+  transition: all 0.3s ease 0s;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  letter-spacing: 1px;
+}
+.tab-content-input-file-button:hover {
+  background-color: #fff;
+  border: 1px solid #fff;
+  color: #007bfb;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+}
+.tab-content-input-file-text {
+  padding: 0 10px;
+  line-height: 40px;
+  display: inline-block;
+}
+.tab-content-input-file-text.invalid {
+  color: red;
+}
+.tab-content-input-file-row input[type="file"] {
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+  display: block;
+  width: 0;
+  height: 0;
+}
